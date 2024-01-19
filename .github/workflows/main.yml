@@ -9,6 +9,9 @@ jobs:
     runs-on: self-hosted
     steps:
       - run: |
+          cd /home/Git/Rabbit
+          git reset --hard
+          git pull
           cd frontend
           npm ci
           npm run build
