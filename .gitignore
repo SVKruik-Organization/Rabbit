@@ -5,3 +5,5 @@ frontent/.vscode
 .vscode
 .obsidian
 .idea
+backend/server/node_modules/
+frontend/rabbit/node_modules/
