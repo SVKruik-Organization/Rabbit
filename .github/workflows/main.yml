@@ -1,0 +1,15 @@
+name: Deploy Frontend
+on:
+  push:
+    branches:
+      - "main"
+
+jobs:
+  deploy-frontend:
+    runs-on: self-hosted
+    steps:
+      - run: |
+          cd frontend
+          npm ci
+          npm run build
+          lftp sftp://${{ secrets.sftp_username }}:${{ secrets.sftp_password }}@${{ secrets.sftp_hostname }} -e "mirror --reverse ./build /; quit"
