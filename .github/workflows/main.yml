@@ -9,10 +9,11 @@ jobs:
     runs-on: self-hosted
     steps:
       - run: |
+          export PATH=$PATH:/root/.nvm/versions/node/v20.11.0/bin/node:/root/.nvm/versions/node/v20.11.0/bin/npm
           cd /home/Git/Rabbit
           git reset --hard
           git pull
           cd frontend
-          /root/.nvm/versions/node/v20.11.0/bin/npm ci
-          /root/.nvm/versions/node/v20.11.0/bin/npm run build
+          npm ci
+          npm run build
           lftp sftp://${{ secrets.sftp_username }}:${{ secrets.sftp_password }}@${{ secrets.sftp_hostname }} -e "mirror --reverse ./build /; quit"
