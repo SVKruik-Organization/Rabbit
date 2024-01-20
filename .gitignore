@@ -7,3 +7,4 @@ frontent/.vscode
 .idea
 backend/server/node_modules/
 frontend/rabbit/node_modules/
+backend/.env
