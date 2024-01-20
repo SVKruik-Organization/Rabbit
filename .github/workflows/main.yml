@@ -13,8 +13,8 @@ jobs:
           git reset --hard
           git pull
           export NVM_DIR=~/.nvm
-          source ~/.nvm/nvm.sh 
+          source ~/.nvm/nvm.sh
           cd frontend
           npm ci
           npm run build
-          lftp sftp://${{ secrets.sftp_username }}:${{ secrets.sftp_password }}@${{ secrets.sftp_hostname }} -e "mirror --reverse ./build /; quit"
+          lftp -e "mirror -R --delete ./build /; exit" -u ${{ secrets.sftp_username }},${{ secrets.sftp_password }} ${{ secrets.sftp_hostname }}
