@@ -9,10 +9,11 @@ jobs:
     runs-on: self-hosted
     steps:
       - run: |
-          export PATH=$PATH:/root/.nvm/versions/node/v20.11.0/bin/node:/root/.nvm/versions/node/v20.11.0/bin/npm
           cd /home/Git/Rabbit
           git reset --hard
           git pull
+          export NVM_DIR=~/.nvm
+          source ~/.nvm/nvm.sh 
           cd frontend
           npm ci
           npm run build
