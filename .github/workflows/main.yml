@@ -1,11 +1,11 @@
-name: Deploy Frontend
+name: Deploy Application
 on:
   push:
     branches:
       - "main"
 
 jobs:
-  deploy-frontend:
+  deploy:
     runs-on: self-hosted
     steps:
       - run: |
@@ -18,3 +18,4 @@ jobs:
           npm ci
           npm run build
           lftp -e "mirror -R --delete ./build /; exit" -u ${{ secrets.sftp_username }},${{ secrets.sftp_password }} ${{ secrets.sftp_hostname }}
+          systemctl restart rabbit-express.service
