@@ -1,10 +1,7 @@
-import { Link } from "react-router-dom";
-
 function Contact() {
     return (
         <div>
-            Contact
-            <Link to="/">Home</Link>
+            <h2>Contact</h2>
         </div>
     )
 }

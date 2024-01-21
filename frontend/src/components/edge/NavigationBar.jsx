@@ -1,10 +1,14 @@
+import { Link } from 'react-router-dom';
 import '../../assets/styles/NavigationBar.css';
 
 function NavigationBar() {
     return (
-        <div>
+        <nav>
             <h1>Navigation Bar</h1>
-        </div>
+            <Link to="/">Home</Link>
+            <Link to="/shop">Shop</Link>
+            <Link to="/contact">Contact</Link>
+        </nav>
     );
 }
 

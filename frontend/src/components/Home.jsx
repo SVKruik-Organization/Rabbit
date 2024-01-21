@@ -1,12 +1,9 @@
-import { Link } from "react-router-dom";
-
 function Home() {
-  return (
-    <div>
-        Home
-        <Link to="/contact">Contact</Link>
-    </div>
-  )
+    return (
+        <div>
+            <h2>Home</h2>
+        </div>
+    )
 }
 
 export default Home
