@@ -34,7 +34,7 @@ router.post('/pay', async function (req, res) {
                     quantity: item.quantity
                 }
             }),
-            success_url: `${process.env.SERVER_URL}/succes`,
+            success_url: `${process.env.SERVER_URL}/success`,
             cancel_url: `${process.env.SERVER_URL}/cancel`,
         })
 

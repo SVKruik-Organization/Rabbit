@@ -1,0 +1,7 @@
+# Redirect all 404 errors to index.html
+ErrorDocument 404 /index.html
+
+<Files .env.php>
+Order Allow,Deny
+Deny from all
+</Files>
