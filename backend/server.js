@@ -4,7 +4,7 @@ const PORT = process.env.PORT || 3001;
 const app = express();
 app.use(express.json());
 
-const prefix = "/api/v1";
+const prefix = "/v1";
 
 // Import Routes
 const userRoutes = require('./routes/userRoutes');
