@@ -1,6 +1,0 @@
-.shop form {
-    display: flex;
-    flex-direction: column;
-    max-width: 300px;
-    gap: 10px;
-}
