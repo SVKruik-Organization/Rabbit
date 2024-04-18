@@ -1,15 +1,19 @@
-const express = require('express');
-const router = express.Router();
-const Stripe = require('stripe');
-const stripe = Stripe(process.env.STRIPE_PRIVATE_KEY);
+import express, { Request, Response, Router } from "express";
+const router: Router = express.Router();
 
+// Stripe Config
+import Stripe from "stripe";
+const stripePrivateKey: string = process.env.STRIPE_PRIVATE_KEY || "";
+const stripe: Stripe | undefined = new Stripe(stripePrivateKey);
+
+// Items for Sale
 const storeItems = new Map([
     [1, { priceInCents: 1, name: 'Rabbit Plus Subscription' }],
     [2, { priceInCents: 2, name: 'Rabbit Premium Subscription' }]
 ]);
 
-
-router.post('/pay', async function (req, res) {
+// Stripe Payment
+router.post('/pay', async function (req: Request, res: Response) {
     console.log(req.body.items);
     try {
         const session = await stripe.checkout.sessions.create({
@@ -18,15 +22,15 @@ router.post('/pay', async function (req, res) {
             payment_method_types: ['card', 'ideal'],
             mode: 'subscription',
             // mode: 'payment' // One time payment
-            line_items: req.body.items.map(item => {
+            line_items: req.body.items.map((item: any) => {
                 const storeItem = storeItems.get(item.id);
                 return {
                     price_data: {
                         currency: 'eur',
                         product_data: {
-                            name: storeItem.name
+                            name: storeItem?.name
                         },
-                        unit_amount: storeItem.priceInCents,
+                        unit_amount: storeItem?.priceInCents,
                         recurring: {
                             interval: 'month',
                         },
@@ -39,18 +43,20 @@ router.post('/pay', async function (req, res) {
         })
 
         res.json({ url: session.url })
-    } catch (e) {
+    } catch (e: any) {
         res.status(500).json({ error: e.message })
     }
-
 });
 
-router.get('/', function (req, res) {
+// Base Route
+router.get('/', function (req: Request, res: Response) {
     res.send('Stripe Homepage');
 });
 
-router.get('/payment', function (req, res) {
+// DANGER Stripe Private Key
+router.get('/payment', function (req: Request, res: Response) {
+    if (!process.env.STRIPE_PRIVATE_KEY) return;
     res.send(process.env.STRIPE_PRIVATE_KEY.toString());
 });
 
-module.exports = router;
+export { router as PaymentRoutes };

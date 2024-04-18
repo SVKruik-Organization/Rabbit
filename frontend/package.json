@@ -1,6 +1,7 @@
 {
-    "name": "rabbit",
+    "name": "rabbit-frontend",
     "version": "1.0.0",
+    "description": "Frontend part of the Rabbit Network platform.",
     "private": true,
     "type": "module",
     "scripts": {
